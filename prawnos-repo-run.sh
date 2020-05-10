@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONFIG_FOLDER=/root/reprepro-config/
+CONFIG_FOLDER=~/reprepro-config/
 WEBSERVER_PORT=8080
 SSH_PORT=2222
 
