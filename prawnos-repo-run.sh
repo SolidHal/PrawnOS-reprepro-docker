@@ -12,5 +12,5 @@ echo -e "Configuration from: '$CONFIG_FOLDER'\n" \
         ""
 
 echo "Image built succesfully; starting the build command!"
-docker run -v $CONFIG_FOLDER:/srv/ -p $WEBSERVER_PORT:80 -p $SSH_PORT:22 -d --restart unless-stopped $IMAGE_NAME
+docker run -v $CONFIG_FOLDER:/srv/ -p $WEBSERVER_PORT:80 -p $SSH_PORT:22 -d --restart always $IMAGE_NAME
 
