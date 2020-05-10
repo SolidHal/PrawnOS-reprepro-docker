@@ -1,13 +1,96 @@
-# Reprepro (debian apt-get repository)
+# PrawnOS Reprepro Docker (debian apt-get repository)
 
 Debian package repository.
 
 * Based upon: [the guide for setting up a private debian repository](http://wiki.debian.org/SettingUpSignedAptRepositoryWithReprepro).
 
-## Building the image (in-house)
+## Building the image
 ```bash
 $ ./create-image.sh
 ```
+
+Now all that needs to be done is to provide the authorized_keys and gpg keys to the config folder structure
+
+The config folder is assumed to be located at `~/reprepro-config`
+
+create the folder structures
+```bash
+mkdir -p ~/reprepro-config/home/debian/.ssh/
+mkdir -p ~/reprepro-config/home/debian/.gnupg/
+```
+
+### Setting up `authorized_keys`
+The keys are required for adding packages to the system, and should be added to;
+```bash
+$CONFIG_FOLDER/home/debian/.ssh/authorized_keys
+```
+Assuming you have generated a ssh key-set on the machine, you can do this by running;
+```bash
+$ export CONFIG_FOLDER=/home/config_here
+$ cp ~/.ssh/id_rsa.pub $CONFIG_FOLDER/home/debian/.ssh/authorized_keys
+```
+Generating a ssh key-set can be done by running;
+```bash
+$ ssh-keygen
+```
+And following the instructions.
+
+### Setting up gpg-keys
+The GPG keys are used for signing packages, they can be provided to;
+```bash
+$CONFIG_FOLDER/home/debian/.gnupg/master_pub.gpg
+$CONFIG_FOLDER/home/debian/.gnupg/signing_sec.pgp
+```
+Generating gpg keys can be done by running;
+```bash
+$ gpg --gen-key
+```
+
+I suggest making a master with a long time to expire, then a signing sub key with a shorter
+time to expire. Keep the master offline, and backed up. Export the master pub and the signing key
+Then if your signing key is exposed, you can revoke it, and issue a new one with your safe offline master key. 
+
+Right now you can only see the subkey key ids when you are in edit mode:
+`gpg --edit-key`
+
+See a good how to here https://www.debuntu.org/how-to-importexport-gpg-key-pair/
+But remember to only export the master public key and the sub key private key.
+Export the master key at a different time to back it up. 
+
+
+## Running
+The first time, we need to provide some configuration parameters
+run
+```
+./prawnos-repo-first-run.sh
+```
+This will give log output for you to ensure everything is correct and
+create the appropriate files in
+
+```
+$CONFIG_FOLDER/var/
+$CONFIG_FOLDER/etc/
+```
+
+Once those are created, you can simply run
+```
+./prawnos-repo-run.sh
+```
+which will run the docker in the background
+
+## Reset the image
+```
+rm -rf ~/reprepro-config/etc/
+rm -rf ~/reprepro-config/var/
+```
+
+
+
+
+
+## What follows below is the README for what this image is based on: 
+https://github.com/SolidHal/reprepro-docker-http
+
 
 ## Running (stand-alone)
 ### Configuration done
