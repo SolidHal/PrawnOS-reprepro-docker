@@ -166,7 +166,7 @@ if [ ! -f $REPREPRO_INCOMING_MOUNT ]; then
 
     echo "Auto: Generating configuration; default"
 
-    cat /templates/incoming > $REPREPRO_incoming_MOUNT
+    cat /templates/incoming > $REPREPRO_INCOMING_MOUNT
 
     echo "Configuration file created!"
     echo ""
@@ -189,7 +189,7 @@ mv $HOSTNAME.gpg.key /var/www/repos/apt/debian/$HOSTNAME.gpg.key
 cat /templates/index.html | sed "s/!!!HOST_NAME_HERE!!!/$HOSTNAME/g" | sed "s/!!!CODE_NAME_HERE!!!/$CODE_NAME/g" > /var/www/repos/apt/debian/index.html
 
 echo "startup inotify for incoming"
-inoticoming --logfile $REPREPRO_INCOMING_LOG_FOLDER/upload.log $REPREPRO_INCOMING_FOLDER --stderr-to-log --stdout-to-log --suffix '.changes' reprepro --waitforlock 100 processincoming default
+inoticoming --logfile $REPREPRO_INCOMING_LOG_FOLDER/upload.log $REPREPRO_INCOMING_FOLDER --stderr-to-log --stdout-to-log --suffix '.changes' reprepro --waitforlock 100 processincoming default \;
 
 echo "Running sshd and nginx"
 # Start up the webserver
