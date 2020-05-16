@@ -1,0 +1,6 @@
+Name: default
+IncomingDir: incoming
+TempDir: tmp
+LogDir: log
+Allow: buster
+Cleanup: on_deny on_error

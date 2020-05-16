@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # Install the necessary packages
 RUN apt-get update
-RUN apt-get install -y sudo openssh-server nginx reprepro
+RUN apt-get install -y sudo openssh-server nginx reprepro inoticoming
 
 # Setup user and group
 RUN addgroup --system debian

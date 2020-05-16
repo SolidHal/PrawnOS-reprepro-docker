@@ -153,12 +153,43 @@ if [ ! -f $REPREPRO_OVERRIDE_MOUNT ]; then
 fi
 cp $REPREPRO_OVERRIDE_MOUNT $REPREPRO_OVERRIDE
 
+# Incoming
+REPREPRO_INCOMING=/var/www/repos/apt/debian/conf/incoming
+REPREPRO_INCOMING_MOUNT=$(echo "/srv$REPREPRO_INCOMING")
+if [ ! -f $REPREPRO_INCOMING_MOUNT ]; then
+    REPREPRO_DIR=$(dirname $REPREPRO_INCOMING_MOUNT)
+    echo "---REPREPRO---"
+    echo "Warning: No reprepro incoming configuration file found"
+    echo " Please provide one to: \$CONFIG_DIR$REPREPRO_INCOMING"
+    mkdir -p $REPREPRO_DIR
+    echo ""
+
+    echo "Auto: Generating configuration; default"
+
+    cat /templates/incoming > $REPREPRO_incoming_MOUNT
+
+    echo "Configuration file created!"
+    echo ""
+fi
+cp $REPREPRO_INCOMING_MOUNT $REPREPRO_INCOMING
+
+REPREPRO_INCOMING_FOLDER=/var/www/repos/apt/debian/incoming
+REPREPRO_INCOMING_TMP_FOLDER=/var/www/repos/apt/debian/tmp
+REPREPRO_INCOMING_LOG_FOLDER=/var/www/repos/apt/debian/log
+mkdir -p $REPREPRO_INCOMING_FOLDER
+mkdir -p $REPREPRO_INCOMING_FOLDER
+mkdir -p $REPREPRO_INCOMING_LOG_FOLDER
+
+
 # Make this a part of stuff
 cd /home/debian/
 sudo -u debian gpg --armor --output $HOSTNAME.gpg.key --export $KEY_ID
 mv $HOSTNAME.gpg.key /var/www/repos/apt/debian/$HOSTNAME.gpg.key
 # Make index.html
 cat /templates/index.html | sed "s/!!!HOST_NAME_HERE!!!/$HOSTNAME/g" | sed "s/!!!CODE_NAME_HERE!!!/$CODE_NAME/g" > /var/www/repos/apt/debian/index.html
+
+echo "startup inotify for incoming"
+inoticoming --logfile $REPREPRO_INCOMING_LOG_FOLDER/upload.log $REPREPRO_INCOMING_FOLDER --stderr-to-log --stdout-to-log --suffix '.changes' reprepro --waitforlock 100 processincoming default
 
 echo "Running sshd and nginx"
 # Start up the webserver
