@@ -166,7 +166,7 @@ if [ ! -f $REPREPRO_INCOMING_MOUNT ]; then
 
     echo "Auto: Generating configuration; default"
 
-    cat /templates/incoming > $REPREPRO_INCOMING_MOUNT
+    cp /templates/incoming $REPREPRO_INCOMING_MOUNT
 
     echo "Configuration file created!"
     echo ""
