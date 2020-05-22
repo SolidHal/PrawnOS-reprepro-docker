@@ -85,6 +85,10 @@ rm -rf ~/reprepro-config/var/
 ```
 
 
+## Uploading packages
+inoticoming is used to watch an incoming folder for any new `.changes` files
+
+
 
 
 
