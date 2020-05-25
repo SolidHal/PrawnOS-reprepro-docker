@@ -105,7 +105,7 @@ if [ ! -f $REPREPRO_DISTRIBUTIONS_MOUNT ]; then
         echo ""
     fi
 
-    cat /templates/distributions | sed "s/!!!PROJECT_NAME_HERE!!!/$PROJECT_NAME/g" | sed "s/!!!CODE_NAME_HERE!!!/$CODE_NAME/g" | sed "s/!!!KEY_ID_HERE!!!/$KEY_ID/g" > $REPREPRO_DISTRIBUTIONS_MOUNT
+    cat /templates/distributions | sed "s/!!!PROJECT_NAME_HERE!!!/$PROJECT_NAME/g" | sed "s/!!!CODE_NAME_HERE!!!/$CODE_NAME/g" | sed "s/!!!KEY_ID_HERE!!!/$KEY_ID/g" |  sed "s/!!!SUITE_HERE!!!/$SUITE/g" > $REPREPRO_DISTRIBUTIONS_MOUNT
 
     echo "Configuration file created!"
     echo ""

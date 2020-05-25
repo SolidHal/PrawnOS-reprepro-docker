@@ -10,6 +10,7 @@ export REPO_FOLDER=~/reprepro-dockerfs/repos/
 export HOSTNAME="deb.prawnos.com"
 export PROJECT_NAME="PrawnOS"
 export CODE_NAME="buster"
+export SUITE_NAME="stable"
 export WEBSERVER_PORT=8080
 export SSH_PORT=2222
 
