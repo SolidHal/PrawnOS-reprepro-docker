@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Prepare nginx serve folder
+mkdir -p /var/www/repos/apt/debian
+# Prepare reprepro configuration folder
+mkdir -p /var/www/repos/apt/debian/conf
+
 # SSH authorized keys
 AUTHORIZED_KEYS=/home/debian/.ssh/authorized_keys
 AUTHORIZED_KEYS_MOUNT=$(echo "/srv$AUTHORIZED_KEYS")

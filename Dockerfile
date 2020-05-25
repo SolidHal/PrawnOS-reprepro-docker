@@ -17,11 +17,6 @@ RUN mkdir -p /home/debian/.ssh
 RUN mkdir -p /home/debian/.gnupg
 RUN chown -R debian:debian /home/debian/
 
-# Prepare nginx serve folder
-RUN mkdir -p /var/www/repos/apt/debian
-# Prepare reprepro configuration folder
-RUN mkdir -p /var/www/repos/apt/debian/conf
-
 # We need privilege separation
 RUN mkdir -p /var/run/sshd
 
