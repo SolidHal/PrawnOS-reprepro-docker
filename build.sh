@@ -105,15 +105,16 @@ if [ ! -f $REPREPRO_DISTRIBUTIONS_MOUNT ]; then
         echo ""
     fi
 
-    cat /templates/distributions | sed "s/!!!PROJECT_NAME_HERE!!!/$PROJECT_NAME/g" | sed "s/!!!CODE_NAME_HERE!!!/$CODE_NAME/g" | sed "s/!!!KEY_ID_HERE!!!/$KEY_ID/g" |  sed "s/!!!SUITE_HERE!!!/$SUITE_NAME/g" > $REPREPRO_DISTRIBUTIONS_MOUNT
+    cat /templates/distributions | sed "s/!!!PROJECT_NAME_HERE!!!/$PROJECT_NAME/g" | sed "s/!!!CODE_NAME_HERE!!!/$CODE_NAME/g" | sed "s/!!!KEY_ID_HERE!!!/$KEY_ID/g" |  sed "s/!!!SUITE_NAME_HERE!!!/$SUITE_NAME/g" > $REPREPRO_DISTRIBUTIONS_MOUNT
 
     echo "Configuration file created!"
     echo ""
 else
     PROJECT_NAME=$(cat $REPREPRO_DISTRIBUTIONS_MOUNT | grep "Origin" | sed "s/Origin:\s\(.*\)/\1/g")
     CODE_NAME=$(cat $REPREPRO_DISTRIBUTIONS_MOUNT | grep "Codename" | sed "s/Codename:\s\(.*\)/\1/g")
+    SUITE_NAME=$(cat $REPREPRO_DISTRIBUTIONS_MOUNT | grep "Suite" | sed "s/Suite:\s\(.*\)/\1/g")
 fi
-cp $REPREPRO_DISTRIBUTIONS_MOUNT $REPREPRO_DISTRIBUTIONS 
+cp $REPREPRO_DISTRIBUTIONS_MOUNT $REPREPRO_DISTRIBUTIONS
 
 #echo "PROJECT_NAME: $PROJECT_NAME"
 #echo "CODE_NAME: $CODE_NAME"
@@ -171,7 +172,7 @@ if [ ! -f $REPREPRO_INCOMING_MOUNT ]; then
 
     echo "Auto: Generating configuration; default"
 
-    cat /templates/incoming | sed "s/!!!CODE_NAME_HERE!!!/$CODE_NAME/g" | sed "s/!!!SUITE_HERE!!!/$SUITE_NAME/g" > $REPREPRO_INCOMING_MOUNT
+    cat /templates/incoming | sed "s/!!!SUITE_NAME_HERE!!!/$SUITE_NAME/g" | sed "s/!!!CODE_NAME_HERE!!!/$CODE_NAME/g"  > $REPREPRO_INCOMING_MOUNT
 
     echo "Configuration file created!"
     echo ""

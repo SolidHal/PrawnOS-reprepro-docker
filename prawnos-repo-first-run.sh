@@ -19,4 +19,5 @@ docker run -v $CONFIG_FOLDER:/srv/ -v $REPO_FOLDER:/var/www/repos/ \
        -e HOSTNAME=$HOSTNAME \
        -e PROJECT_NAME=$PROJECT_NAME \
        -e CODE_NAME=$CODE_NAME \
+       -e SUITE_NAME=$SUITE_NAME \
        -it prawnos/reprepro
