@@ -2,6 +2,6 @@ Name: default
 IncomingDir: incoming
 TempDir: tmp
 LogDir: log
-Allow: buster
+Allow: !!!CODE_NAME_HERE!!! !!!SUITE_HERE!!!
 Cleanup: on_deny on_error
 
