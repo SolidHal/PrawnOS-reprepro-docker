@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bullseye
 MAINTAINER Hal 'SoldHal' Emmerich <hal@halemmerich.com>
 ENV DEBIAN_FRONTEND noninteractive
 
