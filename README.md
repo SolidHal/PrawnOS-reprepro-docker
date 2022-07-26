@@ -78,6 +78,33 @@ Once those are created, you can simply run
 ```
 which will run the docker in the background
 
+## Updating gpg keys
+place they new keys in
+```bash
+$CONFIG_FOLDER/home/debian/.gnupg/master_pub.gpg
+$CONFIG_FOLDER/home/debian/.gnupg/signing_sec.pgp
+```
+
+depending on how your new signing key is configured you may then have to manually import the key
+```
+docker exec -it --user debian <container-id> /bin/bash
+
+sudo cp /srv/home/debian/.gnupg/signing_sec.gpg .
+gpg --pinentry-mode loopback --import signing_sec.gpg
+```
+
+then update the repo
+
+```
+docker exec -it --user debian <container-id> /bin/bash
+
+reprepro -b /var/www/repos/apt/debian/ export bullseye
+```
+
+you may have to request that your users re-import your public key as well using the instructions on the
+repos webpage
+
+
 ## Reset the image
 ```
 rm -rf ~/reprepro-config/etc/
